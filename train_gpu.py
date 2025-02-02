@@ -15,9 +15,4 @@ dataset = training_data.map(TrainModel.add_text)
 ### Initialize and train model
 model_name1 = 'unsloth/Llama-3.2-3B-Instruct' #Llama
 model_name2 = 'unsloth/DeepSeek-R1-Distill-Llama-8B' #Deepseek
-
-model, tokenizer = TrainModel.initialize_model(model_name_=model_name1)
-
-sftTrainer = TrainModel.train_parameters(model_name_=model_name1, dataset = dataset)
-
 trainingSave = TrainModel.train_save_model(model_name_=model_name1, dataset = dataset)
