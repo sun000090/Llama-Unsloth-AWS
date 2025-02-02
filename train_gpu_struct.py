@@ -111,7 +111,7 @@ class TrainModel:
             sft_trainer.train()
             logs.info('Training completed')
             # Save the model and merge the weights
-            model.save_pretrained_merged("model", tokenizer, save_method = "merged_4bit")
+            model.save_pretrained_merged("model", tokenizer, save_method = "merged_4bit_forced")
             logs.info('Model saved')
             return
         except Exception as e:
