@@ -1,0 +1,13 @@
+pandas
+datasets
+accelerate
+peft
+bitsandbytes
+transformers
+trl
+safetensors
+torch==2.3.0
+unsloth
+git+https://github.com/unslothai/unsloth.git
+unsloth_zoo
+xformers<0.0.27
