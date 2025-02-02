@@ -40,8 +40,7 @@ class TrainModel:
             logs.info(f'Data generation failed {e}')
             return None
 
-    @staticmethod
-    def initialize_model(model_name_):
+    def train_save_model(model_name_,dataset):
     # Initialize the model
         try:
             model, tokenizer = FastLanguageModel.from_pretrained(
@@ -51,15 +50,11 @@ class TrainModel:
             load_in_4bit = True,
             )
             logs.info('Model and tokenizer loaded')
-            return model, tokenizer
         except Exception as e:
             logs.info(f'Model and tokenizer loading failed {e}')
-            return None
 
-    def train_parameters(model_name_,dataset):
         # LoRA config
         try:
-            model, tokenizer = TrainModel.initialize_model(model_name_)
             model = FastLanguageModel.get_peft_model(
             model = model,
             r = 8, # LoRA rank
@@ -106,16 +101,12 @@ class TrainModel:
             compute_metrics=None
             )
             logs.info('SFT Trainer loaded')
-            return sft_trainer
+
         except Exception as e:
             logs.info(f'Training parameters generation pipeline error {e}')
-            return None
 
     # Train and save model
-    def train_save_model(model_name_,dataset):
         try:
-            sft_trainer = TrainModel.train_parameters(model_name_,dataset)
-            model, tokenizer = TrainModel.initialize_model(model_name_)
             logs.info('Training started')
             sft_trainer.train()
             logs.info('Training completed')
